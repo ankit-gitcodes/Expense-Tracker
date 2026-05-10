@@ -17,6 +17,7 @@ This application allows users to add expenses, view saved expenses, and calculat
 * File Handling
 * Loops and Conditions
 * Exception Handling
+* Function
 
 ## ▶️ How to Run
 
