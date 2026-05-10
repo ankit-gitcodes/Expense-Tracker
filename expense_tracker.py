@@ -1,3 +1,44 @@
+def Add_Expense():
+    item = input("Enter expense item: ")
+    amount = float(input("Enter expense amount: "))
+    try:
+        file = open("expenses.txt", "a")
+    except IOError:
+        file = open("expenses.txt", "w")
+        file.write(f"{item}: {amount}\n")
+    else:            
+        file.write(f"{item}: {amount}\n")
+    finally:
+        file.close()
+
+def View_Expenses():
+    try:
+        file = open("expenses.txt", "r")
+    except IOError:
+        print("No expenses to display.")
+    else:
+        Expenses = file.readlines()
+        for expense in Expenses:
+            print(expense.strip())
+        file.close()
+def Show_Total():
+    file = open("expenses.txt", "r")
+    Expenses = file.readlines()
+    t = 0
+    sum = 0
+    for i in Expenses:
+        for j in i.split():
+            if j.isdigit():
+                t += float(j)
+        sum += t
+        t = 0
+    print(f"Total expenses: {sum+1}")
+    file.close()
+
+def Exit():
+    print("Exiting the program.")
+
+
 while True:
     print("1. Add Expense")
     print("2. View Expenses")
@@ -9,41 +50,11 @@ while True:
         print("Invalid input. Please enter a number.")
         continue
     if choice == 1:
-        item = input("Enter expense item: ")
-        amount = float(input("Enter expense amount: "))
-        try:
-            file = open("expenses.txt", "a")
-        except IOError:
-            file = open("expenses.txt", "w")
-            file.write(f"{item}: {amount}\n")
-        else:            
-            file.write(f"{item}: {amount}\n")
-        finally:
-            file.close()
+        Add_Expense()
     elif choice == 2:
-        try:
-            file = open("expenses.txt", "r")
-        except IOError:
-            print("No expenses to display.")
-            continue
-        else:
-            Expenses = file.readlines()
-            for expense in Expenses:
-                print(expense.strip())
-            file.close()
+        View_Expenses()
     elif choice == 3:
-        file = open("expenses.txt", "r")
-        Expenses = file.readlines()
-        t = 0
-        sum = 0
-        for i in Expenses:
-            for j in i.split():
-                if j.isdigit():
-                    t += float(j)
-            sum += t
-            t = 0
-        print(f"Total expenses: {sum}")
-        file.close()
+        Show_Total()
     elif choice == 4:
-        print("Exiting the program.")
+        Exit()
         break
