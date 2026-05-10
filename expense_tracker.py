@@ -1,6 +1,3 @@
-from check import Expenses
-
-
 def Add_Expense():
     item = input("Enter expense item: ")
     amount = float(input("Enter expense amount: "))
